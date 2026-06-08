@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlexiPic</title>
+    <script type="module" crossorigin src="/FlexiPic/assets/index-xTZzeVD7.js"></script>
+    <link rel="stylesheet" crossorigin href="/FlexiPic/assets/index-CkePZAzI.css">
+  </head>
+  <body>
+    <div id="app">
+      <header class="header">
+        <h1 class="logo">FlexiPic</h1>
+        <div class="lang-switch">
+          <button type="button" id="lang-zh" class="lang-btn active" data-lang="zh">中</button>
+          <button type="button" id="lang-en" class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </header>
+
+      <main class="main">
+        <aside class="controls">
+          <section class="control-group">
+            <h2 data-i18n="dimensions">尺寸</h2>
+            <div class="dimension-inputs">
+              <label>
+                <span data-i18n="width">宽度</span>
+                <input type="number" id="width" min="1" max="10000" value="1920" />
+              </label>
+              <button type="button" id="btn-swap" class="swap-btn" title="交换宽高">⇄</button>
+              <label>
+                <span data-i18n="height">高度</span>
+                <input type="number" id="height" min="1" max="10000" value="1080" />
+              </label>
+            </div>
+            <p class="ratio-display" id="ratio-display">16:9</p>
+            <div class="ratio-buttons">
+              <button type="button" class="ratio-btn" data-rw="16" data-rh="9">16:9</button>
+              <button type="button" class="ratio-btn" data-rw="4" data-rh="3">4:3</button>
+              <button type="button" class="ratio-btn" data-rw="1" data-rh="1">1:1</button>
+              <button type="button" class="ratio-btn" data-rw="3" data-rh="2">3:2</button>
+              <button type="button" class="ratio-btn" data-rw="21" data-rh="9">21:9</button>
+            </div>
+            <div class="preset-buttons">
+              <button type="button" class="preset-btn" data-w="1920" data-h="1080">1920×1080</button>
+              <button type="button" class="preset-btn" data-w="1080" data-h="1080">1080×1080</button>
+              <button type="button" class="preset-btn" data-w="1280" data-h="720">1280×720</button>
+              <button type="button" class="preset-btn" data-w="800" data-h="600">800×600</button>
+            </div>
+          </section>
+
+          <section class="control-group">
+            <h2 data-i18n="background">背景</h2>
+            <div class="bg-type-options">
+              <label class="radio-label">
+                <input type="radio" name="bg-type" value="solid" />
+                <span data-i18n="bgSolid">纯色</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="bg-type" value="gradient" checked />
+                <span data-i18n="bgGradient">渐变</span>
+              </label>
+            </div>
+
+            <div id="solid-bg-panel" class="bg-panel" hidden>
+              <div class="color-row">
+                <input type="color" id="bg-color" value="#4a90d9" />
+                <input type="text" id="bg-hex" value="#4a90d9" maxlength="7" spellcheck="false" />
+              </div>
+            </div>
+
+            <div id="gradient-bg-panel" class="bg-panel">
+              <label>
+                <span data-i18n="gradientStart">起始色</span>
+                <div class="color-row">
+                  <input type="color" id="grad-color-1" value="#4a90d9" />
+                  <input type="text" id="grad-hex-1" value="#4a90d9" maxlength="7" spellcheck="false" />
+                </div>
+              </label>
+              <label>
+                <span data-i18n="gradientEnd">结束色</span>
+                <div class="color-row">
+                  <input type="color" id="grad-color-2" value="#9b59b6" />
+                  <input type="text" id="grad-hex-2" value="#9b59b6" maxlength="7" spellcheck="false" />
+                </div>
+              </label>
+              <label class="angle-row">
+                <span data-i18n="gradientAngle">角度</span>
+                <div class="angle-controls">
+                  <input type="range" id="grad-angle" min="0" max="360" value="135" />
+                  <span id="grad-angle-value">135°</span>
+                </div>
+              </label>
+              <div class="gradient-preview" id="gradient-preview"></div>
+            </div>
+
+            <div class="random-buttons">
+              <button type="button" id="btn-random" class="secondary-btn" data-i18n="random">随机</button>
+            </div>
+          </section>
+
+          <section class="control-group">
+            <h2 data-i18n="text">文字</h2>
+            <label>
+              <span data-i18n="textColor">文字颜色</span>
+              <div class="color-row">
+                <input type="color" id="text-color" value="#ffffff" />
+                <input type="text" id="text-hex" value="#ffffff" maxlength="7" spellcheck="false" />
+              </div>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="text-inverse-mode" />
+              <span data-i18n="inverseColorMode">完全反色模式</span>
+            </label>
+            <label>
+              <span data-i18n="fontSize">字号</span>
+              <div class="font-size-row">
+                <input type="range" id="font-size" min="12" max="500" value="172" />
+                <span id="font-size-value">自动</span>
+                <label class="checkbox-label inline">
+                  <input type="checkbox" id="font-size-auto" checked />
+                  <span data-i18n="auto">自动</span>
+                </label>
+              </div>
+            </label>
+            <label>
+              <span data-i18n="textContent">文字内容</span>
+              <textarea id="text-input" rows="3">1920
+1080
+png</textarea>
+            </label>
+          </section>
+
+          <section class="control-group">
+            <h2 data-i18n="format">格式</h2>
+            <div class="format-options">
+              <label class="radio-label">
+                <input type="radio" name="format" value="png" checked />
+                <span>PNG</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="format" value="jpeg" />
+                <span>JPEG</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="format" value="webp" />
+                <span>WebP</span>
+              </label>
+            </div>
+            <label id="quality-row" class="quality-row" hidden>
+              <span data-i18n="quality">质量</span>
+              <input type="range" id="quality" min="0.1" max="1" step="0.01" value="0.92" />
+              <span id="quality-value">0.92</span>
+            </label>
+          </section>
+
+          <button type="button" id="btn-download" class="primary-btn" data-i18n="download">生成并下载</button>
+        </aside>
+
+        <section class="preview-section">
+          <h2 data-i18n="preview">预览</h2>
+          <div class="preview-wrapper">
+            <canvas id="preview-canvas"></canvas>
+          </div>
+          <p class="preview-info" id="preview-info">1920 × 1080</p>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
