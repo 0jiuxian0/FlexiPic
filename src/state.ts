@@ -1,3 +1,5 @@
+import { randomGradient } from './colors';
+
 /** 纯色背景 */
 export type SolidBackground = {
   type: 'solid';
@@ -39,21 +41,15 @@ export function defaultText(width: number, height: number, format: ImageFormat):
   return `${width}\n${height}\n${formatLabel(format)}`;
 }
 
-/** 默认渐变配色，应用启动时使用 */
-export const DEFAULT_GRADIENT: GradientBackground = {
-  type: 'gradient',
-  colors: ['#4a90d9', '#9b59b6'],
-  angle: 135,
-};
-
-/** 创建初始状态；尺寸默认 1920×1080，背景为渐变 */
+/** 创建初始状态；尺寸默认 1920×1080，背景为每次打开都不同的随机渐变 */
 export function createDefaultState(): AppState {
   const width = 1920;
   const height = 1080;
+  const { colors, angle } = randomGradient();
   return {
     width,
     height,
-    background: { ...DEFAULT_GRADIENT, colors: [...DEFAULT_GRADIENT.colors] as [string, string] },
+    background: { type: 'gradient', colors, angle },
     textColor: '#ffffff',
     text: defaultText(width, height, 'png'),
     fontSize: 0,
